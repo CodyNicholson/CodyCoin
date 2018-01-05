@@ -78,7 +78,18 @@ class Blockchain
 
 let codyCoin = new Blockchain();
 
+console.log("\nAdding blocks to the blockchain:")
 console.log("Mining block 1...");
 codyCoin.addBlock(new Block(1, "1/4/2017", { amount: 4 }));
 console.log("Mining block 2...");
 codyCoin.addBlock(new Block(1, "1/14/2017", { amount: 10 }));
+
+console.log("\nPrinting out the blockchain data:")
+console.log(JSON.stringify(codyCoin, null, 4));
+
+console.log("\nChecking if the blockchain is valid:")
+console.log("Is blockchain valid? " + codyCoin.isChainValid());
+console.log("Now I will change some data in the blockchain to make it invalid...");
+codyCoin.chain[1].data = { amount: 100 };
+codyCoin.chain[1].hash = codyCoin.chain[1].calculateHash();
+console.log("Is blockchain valid? " + codyCoin.isChainValid());
